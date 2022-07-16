@@ -8,43 +8,16 @@
     <script src="https://kit.fontawesome.com/1ba5134cc8.js" crossorigin="anonymous"></script>
     <title>Tenis de Mesa</title>
 </head>
-<nav>
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">TTM</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/torneo">Torneos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/users/signup">Registrarse</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Mas info
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Ranking</a></li>
-                  <li><a class="dropdown-item" href="#">Clubes afiliados</a></li>
-                  <li><a class="dropdown-item" href="#">Registrarse</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-</nav>
+<body>
+    {{> navbar }}
 
-{{{body}}}
+    <main class="container p-4">
+        {{> errors }}
 
+        {{{body}}}
 
+    </main>
+</body>
 <footer>
     <p>Footer</p>
 </footer>

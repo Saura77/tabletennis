@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const bcrypt = require('bcryptjs');
+/**
+ * Esto es para modelar como van a lucir los datos en la base de datos. UYtilizamos mongoose, en este caso porque
+ * tiene funcionalidad para definir esquemas de datos. 
+ */
 
 const UserSchema = new Schema ({
-    name: {type: String, required: true},
-    last_name: {type: String, required: true},
+    /*name: {type: String, required: true},
+    last_name: {type: String, required: true},*/
     email: {type: String, required: true},
-    phone: {type: String, required: true},
+    /*phone: {type: String, required: true},*/
     password: {type: String, required: true},
     date: {type: Date, default: Date.now}
 })
