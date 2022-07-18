@@ -4,7 +4,7 @@ const {Schema} = moongose;
 const ClubSchema = {
     name: {type: String},
     phone: {type: String},
-    user: {type: String},
+    id_user: {type: String},
     date: {type: Date, default: Date.now}
 }
 

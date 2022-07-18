@@ -8,7 +8,7 @@ router.get('/clubs/register', (req,res)=>{
 })
 
 router.post('/clubs/register', async (req,res)=>{
-    const {name, phone} = req.body;
+    const {name, phone, id_user} = req.body;
     const errors = [];
     if(!name){
         errors.push({text:"El nombre del club es necesario"});
@@ -19,10 +19,9 @@ router.post('/clubs/register', async (req,res)=>{
     if(errors.length>0){
         res.render('clubs/register',{errors,name,phone});
     }else{
-        const newClub = await new Club({name,phone});
-        newClub.id = req.user.id;
+        const newClub = new Club({name,phone,id_user});
         await newClub.save();
-        res.redirect('/');
+        res.redirect('/users/signin');
     }
 })
 
@@ -55,10 +54,5 @@ router.post('/tournament/create', async (req,res)=>{
         res.redirect('/tournaments');
     }
 })
-
-router.get('/tournaments', async (req,res)=>{
-    const tournaments = await Tournament.find().lean().sort({begin_date: "asc"}); //Para obtener objeto json y no objeto mongoose, y sort para que se ordenen de mas reciente a menos
-    res.render('tournaments/view', {tournaments});
-});
 
 module.exports = router;

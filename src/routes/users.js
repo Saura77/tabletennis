@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const flash = require('connect-flash');
 const User = require('../models/User');
-const Player = require('../models/Player');
-const Club = require('../models/Club');
 const passport = require('passport');
+
+let id_user = null; 
 
 router.get('/users/signup', (req,res)=>{
     res.render('users/signup');
@@ -34,9 +34,10 @@ router.post('/users/signup', async (req,res)=>{
         }
         const newUser = new User({email, password});
         newUser.password = await newUser.encryptPassword(password);
+        id_user = newUser.id;
         await newUser.save();
         //req.flash('success_msg', 'Estás registrado');
-        res.redirect('/users/signin');
+        res.redirect('/users/register');
     }
 })
 
@@ -54,9 +55,9 @@ router.post('/users/register', async (req, res)=>{
         res.render('users/option', {errors});
     }
     if(option == "1"){
-        res.redirect('/players/register');
+        res.render('players/register', {id_user});
     } else if (option == "2"){
-        res.redirect('/clubs/register');
+        res.render('clubs/register', {id_user});
     }
 })
 
@@ -66,9 +67,14 @@ router.get('/users/signin', (req,res)=>{
 
 //Local se lo coloca por defecto. De esta forma, le decimos que realice todo lo visto en config/passport
 router.post('/users/signin', passport.authenticate('local', {
-    successRedirect: '/users/register',
+    successRedirect: '/',
     failureRedirect: '/users/signin',
     failureFlash: true
 })); 
+
+router.get('/users', async (req,res)=>{
+    const users = await User.find().lean();
+    res.render('users/view', {users});
+});
 
 module.exports = router;

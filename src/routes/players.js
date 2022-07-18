@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const Player = require('../models/Player');
 
 router.get('/players/register', (req,res)=>{
     res.render('players/register');
 })
 
 router.post('/players/register', async (req,res)=>{
-    const {name, last_name, phone} = req.body;
+    const {name, last_name, phone, id_user} = req.body;
     const errors = [];
     if(!name){
         errors.push({text:"El nombre del jugador es necesario"});
@@ -20,10 +21,9 @@ router.post('/players/register', async (req,res)=>{
     if(errors.length>0){
         res.render('players/register',{errors,name,last_name,phone});
     }else{
-        const newPlayer = await new Player({name,last_name,phone});
-        newPlayer.id = req.user.id;
+        const newPlayer = new Player({name,last_name,phone,id_user});
         await newPlayer.save();
-        res.redirect('/');
+        res.redirect('/users/signin');
     }
 })
 
