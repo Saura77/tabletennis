@@ -6,12 +6,21 @@
             <div class="card-body">
                 <p>Fecha de inicio del torneo: {{begin_date}}</p>
                 <p>Duracion del torneo: {{duration}}</p>
-                <p>Categoria inicio del torneo: {{categoria}}</p>
+                <p>Categoria del torneo: {{categoria}}</p>
             </div>
         </div>        
     </div>
+    <a href="/tournaments/edit/{{ _id }}"><i class="fa-solid fa-pen-to-square"></i></a>
+    <a href="/tournaments/delete/{{_id}}"><i class="fa-solid fa-trash"></i></a>
     {{/each}}
 </div>
+    {{#else}}
+        <div class="card mx-auto">
+            <div class="card-body">
+                No hay torneos registrados
+            </div>
+        </div>
+    {{/else}}
 <div class="form-group m-5">
     <a href="/tournament/create" class="form-group btn btn-primary">Registrar Torneo</a>
 </div>

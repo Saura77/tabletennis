@@ -24,19 +24,18 @@ router.post('/users/signup', async (req,res)=>{
     }
     
     if(errors.length > 0){
-        //res.render('users/signup', {errors, name, last_name, email, phone, password, repeat_password});
         res.render('users/signup', {errors, email, password, repeat_password});
     } else {
         const emailUser = await User.findOne({email: email});
         if(emailUser){
-            //req.flash('error_msg', 'Este email ya se encuentra vinculado a un usuario. ');
+            req.flash('error_msg', 'Este email ya se encuentra vinculado a un usuario. ');
             res.redirect('/users/signup');
         }
         const newUser = new User({email, password});
         newUser.password = await newUser.encryptPassword(password);
         id_user = newUser.id;
         await newUser.save();
-        //req.flash('success_msg', 'Estás registrado');
+        req.flash('success_msg', 'Estás registrado');
         res.redirect('/users/register');
     }
 })
@@ -71,10 +70,5 @@ router.post('/users/signin', passport.authenticate('local', {
     failureRedirect: '/users/signin',
     failureFlash: true
 })); 
-
-router.get('/users', async (req,res)=>{
-    const users = await User.find().lean();
-    res.render('users/view', {users});
-});
 
 module.exports = router;

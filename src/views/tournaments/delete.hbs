@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <form action="/tournaments/delete/{{tournament._id}}?_method=DELETE" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                ¿Estás seguro que deseas eliminar el torneo con id {{tournament._id}}?
+                <button class="btn btn-danger" type="submit">
+                    Eliminar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -45,7 +45,7 @@ anterior, llamando a partir del nombre .hbs
 
 //Midlewares
 app.use(express.urlencoded({extended: false})) //para entender los datos que envia el formulario, extended false para no recibir imagewnes, solo datos. 
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method')); //input hidden con method, decimos que revise por este metodo
 app.use(session({
     secret: 'mysecretttapp',
     resave: true,
@@ -60,11 +60,12 @@ app.use(passport.session());
 app.use(flash());
 
 //Global Variables
-/*app.use((req,res,next)=>{
+app.use((req,res,next)=>{
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
-})*/
+    next();
+})
 
 //Routes
 app.use(require('./routes/index'));

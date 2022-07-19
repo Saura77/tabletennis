@@ -55,4 +55,31 @@ router.post('/tournament/create', async (req,res)=>{
     }
 })
 
+router.get('/tournaments/edit/:id', async (req,res)=>{
+    const tournament = await Tournament.findById(req.params.id).lean(); 
+    res.render('tournaments/edit', {tournament});
+})
+
+router.put('/tournaments/edit/:id', async (req,res)=>{
+    const {begin_date, duration, categoria} = req.body;     
+    const errors = [];
+    //Validaciones
+    if(errors.length>0){
+        res.render('tournaments/edit');
+    }else{
+        await Tournament.findByIdAndUpdate(req.params.id, {begin_date, duration, categoria});
+        res.redirect('/tournaments');
+    }
+})
+
+router.get('/tournaments/delete/:id', async (req,res)=>{
+    const tournament = await Tournament.findById(req.params.id).lean();
+    res.render('tournaments/delete', {tournament});
+})
+
+router.delete('/tournaments/delete/:id', async (req,res)=>{
+    await Tournament.findByIdAndDelete(req.params.id);
+    res.redirect('/tournaments');
+})
+
 module.exports = router;

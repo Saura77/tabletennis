@@ -1,0 +1,48 @@
+<body>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">
+                <form class="form-horizontal" method="post" action="/tournaments/edit/{{tournament._id}}?_method=PUT">
+                    <input type="hidden" name="_method" value="PUT">
+                    <fieldset>
+                        <legend class="text-center header">Editar Torneo</legend>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="begin_date" name="begin_date" type="date" placeholder="Fecha de inicio" class="form-control" value="{{tournament.begin_date}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input class="form-control" id="duration" name="duration"  type="duration" placeholder="Duración" value="{{tournament.duration}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <select name="categoria" id="categoria" value="{{tournament.categoria}}">
+                                    <option value="" selected>Categoria</option>
+                                    <option value="1">Primera</option>
+                                    <option value="2">Segunda</option>
+                                    <option value="3">Tercera</option>
+                                    <option value="4">Cuarta</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

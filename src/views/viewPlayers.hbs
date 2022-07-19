@@ -1,9 +1,10 @@
 <body>
-  {{#each clubs}}
+  {{#each players}}
     <div class="row m-5">
       <div class="card">
         <div class="card-body">
           {{name}}
+          {{last_name}} <br>
           {{phone}}
         </div>
       </div>
@@ -12,7 +13,7 @@
   {{#else}}
         <div class="card mx-auto">
             <div class="card-body">
-                No hay clubes registrados
+                No hay jugadores registrados
             </div>
         </div>
   {{/else}}

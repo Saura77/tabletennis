@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Club = require('../models/Club');
+const Player = require('../models/Player');
 const Tournament = require('../models/Tournament');
 
 router.get("/", (req, res)=>{
@@ -15,6 +16,11 @@ router.get("/tournaments", async (req, res)=>{
 router.get('/clubs', async (req,res)=>{
     const clubs = await Club.find().lean();
     res.render('viewClubs.hbs', {clubs});
+})
+
+router.get('/players', async (req,res)=>{
+    const players = await Player.find().lean();
+    res.render('viewPlayers.hbs', {players});
 })
 
 module.exports = router;
