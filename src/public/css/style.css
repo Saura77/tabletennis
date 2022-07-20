@@ -28,5 +28,15 @@ footer {
     #ec2f4b,
     #009fff
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  margin-bottom: 0;
+  position: relative;
+  width: 100%;
 }
+
+.fa-trash{
+  color: red;
+}
+
+.fa-pen-to-square{
+  color: yellow;
+}
+

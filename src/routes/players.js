@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Player = require('../models/Player');
+const {isAutenthicated} = require('../helpers/auth');
 
 router.get('/players/register', (req,res)=>{
     res.render('players/register');

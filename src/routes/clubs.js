@@ -2,6 +2,7 @@ const express = require('express');
 const Club = require('../models/Club');
 const Tournament = require('../models/Tournament');
 const router = express.Router();
+const {isAutenthicated} = require('../helpers/auth');
 
 router.get('/clubs/register', (req,res)=>{
     res.render('clubs/register');
@@ -25,11 +26,11 @@ router.post('/clubs/register', async (req,res)=>{
     }
 })
 
-router.get('/tournament/create', (req,res)=>{
+router.get('/tournament/create', isAutenthicated , (req,res)=>{
     res.render('tournaments/create');
 })
 
-router.post('/tournament/create', async (req,res)=>{
+router.post('/tournament/create', isAutenthicated, async (req,res)=>{
     const {begin_date, duration, categoria} = req.body;
     const errors = [];
     if(!begin_date){
@@ -55,12 +56,12 @@ router.post('/tournament/create', async (req,res)=>{
     }
 })
 
-router.get('/tournaments/edit/:id', async (req,res)=>{
+router.get('/tournaments/edit/:id', isAutenthicated, async (req,res)=>{
     const tournament = await Tournament.findById(req.params.id).lean(); 
     res.render('tournaments/edit', {tournament});
 })
 
-router.put('/tournaments/edit/:id', async (req,res)=>{
+router.put('/tournaments/edit/:id', isAutenthicated, async (req,res)=>{
     const {begin_date, duration, categoria} = req.body;     
     const errors = [];
     //Validaciones
@@ -72,12 +73,12 @@ router.put('/tournaments/edit/:id', async (req,res)=>{
     }
 })
 
-router.get('/tournaments/delete/:id', async (req,res)=>{
+router.get('/tournaments/delete/:id', isAutenthicated, async (req,res)=>{
     const tournament = await Tournament.findById(req.params.id).lean();
     res.render('tournaments/delete', {tournament});
 })
 
-router.delete('/tournaments/delete/:id', async (req,res)=>{
+router.delete('/tournaments/delete/:id', isAutenthicated, async (req,res)=>{
     await Tournament.findByIdAndDelete(req.params.id);
     res.redirect('/tournaments');
 })

@@ -71,4 +71,13 @@ router.post('/users/signin', passport.authenticate('local', {
     failureFlash: true
 })); 
 
+router.get('/users/logout', function(req,res,next){
+    req.logOut(function(err){
+        if(err){
+            return next(err);
+        }    
+    res.redirect('/');
+})
+})
+
 module.exports = router;

@@ -1,7 +1,7 @@
 const helpers = {};
 
 helpers.isAutenthicated = (req, res, next) => {
-    if(req.isAutenthicated()){
+    if(req.isAuthenticated()){
         return next;
     }
     req.flash('error_msg','No autorizado');
